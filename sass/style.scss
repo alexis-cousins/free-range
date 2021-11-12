@@ -1,0 +1,522 @@
+$primarycolor: rgba(4,33,68, 1);
+$secondarycolor: rgba(58,160,217, 1);
+
+//MIXINS
+
+@mixin element-shadow {
+    box-shadow: 1px 1px 2px 2px rgba(204, 204, 204, 0.5);
+}
+
+@mixin oswald-heading {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+@mixin roboto-para {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+//-------------------- TO DO --------------------//
+
+///CENTER SELECT VEHICLE BUTTON IN MODAL
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+}
+
+header {
+    width: 100%;
+    height: 3em;
+    display: flex;
+    justify-content: space-between;
+    background: $secondarycolor;
+    
+    padding-bottom: 1em;
+    color: white;
+    z-index: 10;
+    box-shadow: 0px 10px 20px 9px rgba(0,0,0,0.1);
+
+    i {
+        font-size: 2em;
+        margin: auto 0.25em;
+        padding: 0.5em;
+    }
+
+    h1 {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        margin: auto 1em;
+        padding: 0.5em;
+    }
+}
+
+.container {
+    width: 100vw;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+
+    .hero-banner {
+        background-image: url(/dist/assets/images/plan-banner.jpg);
+        background-position: center;
+        background-size: cover;
+        height: 12em;
+
+        .banner-text {
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: row-reverse;
+
+            h1 {
+                display: flex;
+                flex-direction: column;
+                padding-top: 3.5em;
+                text-align: right;
+                padding-bottom: 1em;
+                padding-right: 0.25em;
+                color: white;
+                font-size: 2em;
+                @include oswald-heading();
+
+                @media screen and (min-width: 768px) {
+                    font-size: 3em;
+                    padding-top: 1.75em;
+                    font-weight: 700;
+                    letter-spacing: 0.05em;
+                    padding-right: 1em;
+                }
+            }
+        }
+    }
+}
+
+.page {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+
+    section {
+        padding: 0 1em 1em 1em;
+        width: 100%;
+        box-sizing: border-box;
+
+        @media screen and (min-width: 768px) {
+            width: 50vw;
+        }
+    }
+}
+
+.user-info-section {
+    color: $primarycolor;
+    width: 2px;
+
+    p {
+        font-family: 'Roboto', sans-serif;
+    }
+}
+
+.user-input-section {
+    @include roboto-para();
+    color: $primarycolor;
+
+    table {
+        padding-bottom: 1em;
+        font-size: 1.17em;
+        width: 100%;
+
+        tr td {
+
+            min-width: 9em;
+    
+            input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        
+            select {
+                width: 100%;
+            }
+
+            option[hidden] {
+                color: gray;
+            }
+    
+            // ::placeholder {
+            //     color: rgb(77,187,212, 0.7);
+            // }
+        }
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0em 0em 1em 0em;
+}
+
+.loading-screen {
+    display: flex;
+}
+
+.step-header {
+    @include oswald-heading();
+    font-size: 3em;
+    text-align: center;
+    color: $primarycolor;   
+}
+
+.event-submit {
+    padding: 0.5em 3em;
+    color: white;
+    background-color: $secondarycolor;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    @include roboto-para();
+    text-transform: uppercase;
+    box-shadow: 1px 1px 2px 2px rgba(204, 204, 204, 0.5);
+}
+
+.error-message {
+    color: red;
+    display: flex;
+    flex-direction: row;
+    display: none;
+}
+
+.vehicle-selection-section {
+    display: none;
+    overflow-y: auto;
+    flex-direction: column;
+
+    .vehicle-display{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: auto;
+    
+        img{
+            max-width: 10em;
+        }
+
+    }
+
+    .vehicle-button {
+        margin: auto;
+    }
+}
+
+.vehicle-card {
+
+    flex: 0 0 10em;
+    margin: 1em;
+    padding: 1em;
+    @include element-shadow();
+
+    .vehicle-details {
+        font-family: 'Roboto', sans-serif;
+        color: $primarycolor;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        h3, p {
+            margin: 0.5em;
+            // padding: 0;
+        }
+
+
+        button {
+            border: 0;
+            outline: 0;
+            background-color: $secondarycolor;
+            padding: 0.25em 0.5em;
+            color: white;
+            @include roboto-para();
+            border-radius: 3px;
+            text-transform: uppercase;
+            margin: 0.5em auto 0.25em auto;
+            }
+
+    }
+    
+
+}
+
+.vehicle-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.75);
+    display: none;
+
+    .modal-detail{
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 1em 2em 2em 2em;
+        margin: auto;
+        background-color: white;
+        color: $primarycolor;
+        box-shadow: rgba(116,200,222, 0.8) 0px 0px 0px 2px, rgba(188, 187, 253, 1) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+        i {
+            margin-left: auto;
+            padding-bottom: 0.5em;
+            color: $primarycolor;
+            font-size: 1.5em;
+        }
+
+        .vehicle-info {
+            max-width: 50em;
+            padding-bottom: 1em;
+            display: flex;
+            flex-direction: column;
+    
+            @media screen and (min-width: 768px) {
+                flex-direction: row;
+            }
+
+            .content {
+                padding-left: 1em;
+            }
+        
+            img {
+                margin-right: 1em;
+                width: 18em;
+                border-radius: 3px;
+                align-self: center;
+                margin: auto;
+                @include element-shadow();
+            }
+
+            h3 {
+                margin: 0.5em 0em;
+
+                @media screen and (min-width: 768px) {
+                    margin-top: 0.5em;
+                    margin-bottom: 0.5em;
+                }
+            }
+
+            .modal-select-button{
+                border: none;
+                margin: auto;
+                line-height: 1.5em;
+                color: white;
+                background-color: $secondarycolor;
+                font-size: 1em;
+                @include roboto-para();
+                padding: 0.25em 0.25em;
+                border-radius: 3px;
+                color: white;
+                text-transform: uppercase;
+                width: 50%;
+
+                @media screen and (min-width: 768px) {
+                    padding: 0.25em 0.5em;
+                    font-size: 1.25em;
+                }
+            }
+        }
+
+    }
+
+}
+
+.border {
+    border: 3px rgba(116,200,222, 1) solid;
+    box-shadow: 0px 0px 30px 10px rgba(116,200,222, 1);
+}
+
+.loading-screen h1{
+    color: rgba(116,200,222, 1);
+    @include oswald-heading();
+    margin: auto;
+    padding-top: 3em;
+}
+
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.map-left {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    box-sizing: border-box;
+
+    @media screen and (min-width: 768px) {
+        width: 50vw;
+    }
+
+    .previous-screen {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        font-size: 1.25em;
+        color: rgba(116,200,222, 1);
+
+        i {
+            margin: 0 1em 0 0;
+        }
+
+        p {
+            font-weight: 600;
+            text-transform: uppercase;
+
+        }
+    }
+
+    .user-trip-summary {
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 2.5em;
+            @include oswald-heading();
+            color: $primarycolor;
+        }
+    }
+
+    .user-destination-summary {
+        border-top: 2px rgba(116,200,222, 1) solid;
+        margin-bottom: 1em;
+        display: flex;
+        flex-direction: column;
+
+        select {
+            width: 100%;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        .recalculate-button {
+            padding: 0.5em 2em;
+            margin: 0.5em auto 1em auto;
+            color: white;
+            background-color: rgba(116,200,222, 1);
+            border-radius: 3px;
+            outline: none;
+            border: none;
+            @include roboto-para();
+            text-transform: uppercase;
+            box-shadow: 1px 1px 2px 2px rgba(204, 204, 204, 0.5);
+        }
+    }
+
+    .user-vehicle-summary {
+        border-top: 2px rgba(116,200,222, 1) solid;
+        margin-bottom: 1em;
+        padding: 0 2em 0 2em;
+
+        .vehicle-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: auto;
+
+            img {
+                width: 10em;
+                height: 10em;
+                border-radius: 3px;
+                margin: auto;
+                @include element-shadow();
+            }
+    
+            .vehicle-summ-info {
+                min-width: 40%;
+                color: $primarycolor;
+
+                p {
+                    font-weight: 600;
+                }
+            }
+        }
+
+    }
+
+    .cost-summary {
+        border-top: 2px rgba(116,200,222, 1) solid;
+
+        .total-heading {
+            text-align: end;
+            font-size: 2em;
+            color: $primarycolor;
+        }
+    }
+
+    .map-para {
+        font-size: 1.25em;
+        font-weight: 600;
+        font-family: 'Roboto', sans-serif;
+        color: $primarycolor;
+        text-transform: uppercase;
+    }
+
+    .map-heading {
+        font-size: 2em;
+        text-align: center;
+        font-family: 'Oswald', sans-serif;
+        color: $primarycolor;
+        text-transform: uppercase;
+
+    }
+
+    .map-total {
+        font-size: 1.5em;
+        text-transform: uppercase;
+        color: $primarycolor;
+        font-family: 'Roboto', sans-serif;
+    }
+}
+
+.map-right {
+    display: flex;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        width: 50vw;
+    }
+}
+
+#mapid{
+    flex-grow: 1;
+    width: 100vw;
+
+    @media screen and (max-width: 768px) {
+        height: 100vh;
+    }
+}
+
+footer {
+    min-height: 5em;
+    background-color: $secondarycolor;
+    display: flex;
+    flex-direction: row-reverse;
+    img {
+        margin: auto 1em;
+        padding: 1em;
+    }
+}

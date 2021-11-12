@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <i class="fas fa-home" id="home-icon"></i><h1>Free Range.</h1>
+    </header>
+    <div class="container" >
+        <div id="banner-section" class="hero-banner">
+            <div class="banner-text">
+                <h1>
+                    Plan your trip
+                </h1>
+            </div>
+        </div>
+        <div class="page" id="trip-information">
+            <!-- selection screen -->
+            <section id="intro-text-section" class="user-info-section">
+                <div>
+                    <h1 class="step-header">Kia Ora! </h1> 
+                    <h3>Welcome to Free Range: A journey planning and cost estimation tool for your time in and around Aotearoa. Tell us about your travel plans, so we can do the hard yards for you!  </h3>
+                </div>
+            </section>
+            <section id="user-input-section" class="user-input-section">
+                <h1 class="step-header">
+                    Enter your details:
+                </h1>
+                <form id="journey-form" class="journey-form">
+                    <table>
+                        <tr>
+                            <td>Number of people:</td>
+                            <td><input type="number" name="party-size" id="party-size" min="1" placeholder="Enter party size"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="error-message" id="party-error-message">
+                                    <p>
+                                        <i class="fas fa-exclamation-circle"></i> 
+                                        Please enter a party size between 1-6 people.
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dates:</td>
+                            <td><input class="trip-date" id="trip-date" type="text" name="trip-date" placeholder="Select travel dates"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+
+                                <div class="error-message" id="date-error-message">
+                                    <p>
+                                        <i class="fas fa-exclamation-circle"></i> 
+                                        Please select two dates 1-14 days apart.
+                                    </p>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pickup City:</td>
+                            <td>
+                                <select id="arrival-city">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="error-message" id="arrival-error-messsage">
+                                    <p>
+                                        <i class="fas fa-exclamation-circle"></i> 
+                                        Please select a vehicle pickup city.
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dropoff city:</td>
+                            <td>
+                                <select id="departure-city">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="error-message" id="departure-error-message">
+                                    <p>
+                                        <i class="fas fa-exclamation-circle"></i> 
+                                        Please select a vehicle drop-off city.
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+    
+                    <div class="form-group">
+                        <span ><input type="submit" value="Continue" id="submit-event" class="event-submit"></span>
+                    </div>
+        
+                </form>
+            </section>
+            <section id="vehicle-selection-section" class="vehicle-selection-section">
+                <h1 class="step-header">Select your Vehicle:</h1>
+                <div class="vehicle-display" id="vehicle-display"></div>
+                <div id='vehicle-button' class="vehicle-button"></div>
+            </section>
+        </div>
+        <div class="vehicle-modal" id="vehicle-modal">
+        </div>
+        <div class="page loading-screen" id="loading-screen">
+            <h1>Generating route...</h1>
+        </div>
+        <div class="page" id="trip-results">
+            <!-- results screen -->
+            <div class="map-wrapper">
+                <div class="map-left">
+                    <div class="previous-screen">
+                        <p id="previous-screen"><i class="fas fa-arrow-circle-left"></i>Edit your details</p>
+                    </div>
+                    <div class="user-trip-summary"></div>
+                    <div class="user-destination-summary">
+                        <h2 class="map-heading">Your Locations:</h2>
+                        <div class="map-form-group">
+                            <label for="map-arrival-city" class="map-para">Pickup City:</label>
+                            <select id="map-arrival-city">
+                            </select>
+                            <div class="error-message" id="map-arrival-error-messsage">
+                                <p>
+                                    <i class="fas fa-exclamation-circle"></i> 
+                                    Please select a vehicle pickup city.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="map-form-group">
+                            <label for="map-departure-city" class="map-para">Dropoff City:</label>
+                            <select id="map-departure-city">
+                            </select>
+                            <div class="error-message" id="map-departure-error-message">
+                                <p>
+                                    <i class="fas fa-exclamation-circle"></i> 
+                                    Please select a vehicle drop-off city.
+                                </p>
+                            </div>
+                        </div>
+                        <button class="recalculate-button" id="recalculate-button"> Recalculate </button>
+                    </div>
+                    <div class="user-vehicle-summary"></div>
+                    <div class="cost-summary" id="cost-summary"></div>
+                </div>
+                <div class="map-right">
+                    <div id="mapid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer> 
+        <img src="assets/images/footer-logo.png" alt="footer-logo">
+    </footer>
+</body>
+</html>
